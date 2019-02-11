@@ -61,13 +61,9 @@ $.ajax({
     //***************************************
     //            AJAX CALL MOVIES
 
-    // format currentActor for movies URL
-    currentActor = currentActor.replace(/ /g, "%20").toLowerCase();
-    console.log(currentActor)
-
     // SEARCH MOVIES URL
     queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + key +
-        '&language=en-US&query=' + currentActor + '&page=1&include_adult=false'
+        '&language=en-US&query=' + currentActor.replace(/ /g, "%20").toLowerCase() + '&page=1&include_adult=false'
 
        
 
@@ -107,8 +103,14 @@ $('#hint').on('click', function () {
 //  ^^^^^^^^^^^^^^ GIVE HINT BUTTON FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
+// ***********************************************************
+//                  ANOTHER FUNCTION
+// ***********************************************************
 
 
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ ANOTHER FUNCTION ^^^^^^^^^^^^^^^^
+// ***********************************************************
 
 
 
