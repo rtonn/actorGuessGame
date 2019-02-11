@@ -13,6 +13,9 @@ let posterSources = [];
 
 let gameStatus = 'start';
 
+let currentActor = '';
+
+let imgTag = $('#poster');
 
 
 
@@ -56,10 +59,10 @@ $.ajax({
     }
     console.log(actors)
     // pick an actor randomly from actors array
-    let currentActor = actors[Math.floor(Math.random() * actors.length)];
+    currentActor = actors[Math.floor(Math.random() * actors.length)];
 
     //***************************************
-    //            AJAX CALL MOVIES
+    //       AJAX SEARCH FOR ACTORS MOVIES
 
     // SEARCH MOVIES URL
     queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + key +
@@ -103,13 +106,17 @@ $('#hint').on('click', function () {
 //  ^^^^^^^^^^^^^^ GIVE HINT BUTTON FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
-// ***********************************************************
-//                  ANOTHER FUNCTION
-// ***********************************************************
-
+imgTag.src = posterSources[0];
 
 // ***********************************************************
-//  ^^^^^^^^^^^^^^ ANOTHER FUNCTION ^^^^^^^^^^^^^^^^
+//                  YOU WIN FUNCTION
+// ***********************************************************
+let youWin = function () {
+gameStatus = "over";
+wins++;
+}
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ YOU WIN FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
 
