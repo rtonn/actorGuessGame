@@ -9,6 +9,8 @@ let actors = [];
 // array of movies selected actor is in
 let movies = [];
 
+let posterSources = [];
+
 let gameStatus = 'start';
 
 
@@ -21,7 +23,7 @@ let gameStatus = 'start';
 // ***********************************************************
 //                   ON KEY UP FUNCTION
 // ***********************************************************
-$(document).on('keyup', function(){
+$(document).on('keyup', function () {
 
 
 })
@@ -56,26 +58,34 @@ $.ajax({
     // pick an actor randomly from actors array
     let currentActor = actors[Math.floor(Math.random() * actors.length)];
 
-//***************************************
-//            AJAX CALL MOVIES
+    //***************************************
+    //            AJAX CALL MOVIES
 
-// format currentActor for movies URL
-currentActor = currentActor.replace(/ /g,"%20").toLowerCase();
-console.log(currentActor)
+    // format currentActor for movies URL
+    currentActor = currentActor.replace(/ /g, "%20").toLowerCase();
+    console.log(currentActor)
 
-// SEARCH MOVIES URL
-queryURL = 'https://api.themoviedb.org/3/search/person?api_key='+ key +'&language=en-US&query=' + currentActor + '&page=1&include_adult=false'
+    // SEARCH MOVIES URL
+    queryURL = 'https://api.themoviedb.org/3/search/person?api_key=' + key +
+        '&language=en-US&query=' + currentActor + '&page=1&include_adult=false'
 
-// SEARCH MOVIES AJAX CALL
-$.ajax({
-    url: queryURL,
-    method: 'GET'
-}).then(function (response) {
-console.log(response.results[0].known_for)
+       
+
+    // SEARCH MOVIES AJAX CALL
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then(function (response) {
+        console.log(response.results[0].known_for)
+        // loop through popular movies to get 3 movie poster source URL's
+        for (i in response.results[0].known_for){
+            posterSources.push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path)
+            
+    }
+    console.log(posterSources)
 })
-
-//   ^^^^^^   AJAX CALL MOVIES ^^^^^^
-//***************************************
+    //   ^^^^^^   AJAX CALL MOVIES ^^^^^^
+    //***************************************
 })
 //     ^^^^^^   AJAX CALL ACTORS ^^^^^^
 //***********************************************
@@ -88,11 +98,11 @@ console.log(response.results[0].known_for)
 // ***********************************************************
 //                  GIVE HINT BUTTON FUNCTION
 // ***********************************************************
-    $('#hint').on('click', function(){
+$('#hint').on('click', function () {
 
 
 
-    })
+})
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ GIVE HINT BUTTON FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
