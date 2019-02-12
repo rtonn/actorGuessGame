@@ -1,90 +1,147 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Page Title</title>
 
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
+  <link rel="stylesheet" media="screen" href="assets/css/main.css" />
+  <script type="text/javascript" src="main.js"></script>
+  <script type="text/javascript" src="assets/js/light.js"></script>
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+  <!--Facebook Share Button Code-->
+  <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Your Website Title" />
+  <meta property="og:description" content="Your description" />
+  <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
 </head>
+
 <body>
-    
-    <!--Navigation-->
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-          
-            </button>
-            <a class="navbar-brand" href="#">Guessing Game Title</a>
-          </div>
-      
-          <!-- Collect the nav links, forms, and other content for toggling -->
-          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="#">Instructions<span class="sr-only">(current)</span></a></li>
-              <li><a href="#">Share on Social Media</a></li>
-            </ul>
-          </div>
+
+  <!-- Load Facebook SDK for JavaScript -->
+  <div id="fb-root"></div>
+  <script>(function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=2036359353323904&autoLogAppEvents=1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  <!-- Wrap all page content here -->
+
+
+  <!-- Begin page content -->
+
+
+
+  <div class="topcontent">
+    <div class="w3-row">
+      <div class="w3-third">
+        <img class="lights" src="assets/img/lights.png">
+        <img class="camera" src="assets/img/camera.png">
+        <img class="action" src="assets/img/actor.png">
+      </div>
+      <div class="w3-twothird">
+        <img id="on" class="light" src="assets/img/on.png">
+
+        <!--style="display:none"-->
+      </div>
+    </div>
+
+
+    <div class="w3-row">
+      <div class="w3-quarter">
+        <p>.</p>
+
+      </div>
+
+
+      <div class="w3-half">
+        <h1 class="header">HOLLYWOOD'S ORIGINAL<br> GUESSING GAME</h1>
+
+      </div>
+    </div>
+
+
+    <div class="w3-row">
+      <div class="w3-quarter">
+        <p>.</p>
+      </div>
+      <div class="w3-half">
+        <p class="type">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet orci risus. Vestibulum
+          non tristique lectus, quis efficitur tellus. Nunc eget nibh dapibus, iaculis nunc eu, maximus velit. Donec
+          vehicula suscipit ex. Fusce ac mattis turpis, quis tincidunt diam. Aenean interdum, risus quis tempus
+          ultrices, augue risus volutpat odio, vitae elementum tortor nisi id.</p>
+        <div class="w3-quarter">
+          <p>.</p>
         </div>
-      </nav>
-
-
-
-    
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12 col-md-4">
-    <p>Current genre and hint will go here</p>
-  </div>
-
-  <div class="col-md-4">
-    <p>Movie poster/main console of game will go here</p>
-  </div>
-
-  <div class="col-md-4">
-    <p>hint 1 and 2 will go here</p>
-  </div>
-
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <p>Word guess will go here</p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-xs-12">
-    <p>Carousel will go here</p>
-  </div>
-</div>
-
-<!-- Wrap all page content here -->
-    <div id="wrap">
-
-      <!-- Begin page content -->
-      <div class="container">
-
       </div>
     </div>
+  </div>
 
-    <div id="footer">
-      <div class="container">
-        <p>footer</p>
 
+
+
+  <div class="gamecontent">
+
+    <div class="w3-row">
+      <div class="w3-third w3-container">
+        <p class="type">Current genre and hint will go here</p>
+      </div>
+
+      <div class="w3-third w3-container">
+        <p class="type">Movie poster/main console of game will go here</p>
+      </div>
+
+      <div class="w3-third w3-container">
+        <p class="type">hint 1 and 2 will go here</p>
+      </div>
+
+    </div>
+    <div class="w3-row">
+      <div class="w3-rest w3-container">
+        <p class="type">Word guess will go here</p>
+      </div>
+
+      <div class="w3-row">
+        <div class="w3-rest w3-container">
+          <p class="type">Carousel will go here</p>
+        </div>
       </div>
     </div>
+  </div>
+
+
+
+
+  <div class="footer">
+    <div class="w3-row">
+      <div class="w3-third">
+        <a href="facebook" src="assets/img/facebook.png" target="blank">
+      </div>
+
+
+
+      <!--Facebook Share Button-->
+      <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button"
+        data-size="large" data-mobile-iframe="true"><a target="_blank"
+          href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"
+          class="fb-xfbml-parse-ignore">Share</a></div>
+
+
+      <!--style="display:none"-->
+    </div>
+  </div>
 
 
 
 
 </body>
+
 </html>
