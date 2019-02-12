@@ -23,8 +23,6 @@ let blanksMixedGuesses = [];
 
 let wrongGuesses = [];
 
-let imgTag = $('#poster');
-
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
 
@@ -56,8 +54,29 @@ $.ajax({
         actors.push(response.results[i].name)
     }
     console.log(actors)
+
+    pickActor()
+
+})
+//     ^^^^^^   AJAX CALL ACTORS ^^^^^^
+//***********************************************
+
+// ***********************************************************
+//  ^^^^^^^^^^^^^^^^ START BUTTON FUNCTION ^^^^^^^^^^^^^^^^^^
+// ***********************************************************
+
+
+// ***********************************************************
+//               PICK / DISPLAY ACTOR FUNCTION
+// ***********************************************************
+let pickActor = function () {
     // pick an actor randomly from actors array
     currentActor = actors[Math.floor(Math.random() * actors.length)].toUpperCase();
+
+    // fixes é in Beyoncé (Googled)
+    currentActor = currentActor.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
+
+    // make sure actor hasn't already been used
 
     nameFirst = currentActor.split(' ')[0];
     nameLast = currentActor.split(' ')[1];
@@ -71,12 +90,9 @@ $.ajax({
     for (i = 0; i < nameLast.length; i++) {
         blanksMixedGuesses.push('_')
     }
+    // Send blanksMixedGuesses to DOM
+    $('#blankWord').html(blanksMixedGuesses.join(' '))
     console.log('mixed', blanksMixedGuesses)
-
-
-
-
-
 
     //***************************************
     //       AJAX SEARCH FOR ACTORS MOVIES
@@ -96,19 +112,19 @@ $.ajax({
         // loop through popular movies to get 3 movie poster source URL's
         for (i in response.results[0].known_for) {
             posterSources.push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path)
-
         }
         console.log(posterSources)
+        
+        // set main picture source
+        $('#mainPoster').attr('src', posterSources[0])
     })
 
     //   ^^^^^^   AJAX CALL MOVIES ^^^^^^
     //***************************************
-})
-//     ^^^^^^   AJAX CALL ACTORS ^^^^^^
-//***********************************************
 
+}
 // ***********************************************************
-//  ^^^^^^^^^^^^^^^^ START BUTTON FUNCTION ^^^^^^^^^^^^^^^^^^
+//  ^^^^^^^^^^^^^^ PICK / DISPLAY ACTOR FUNCTION ^^^^^^^^^^^^^
 // ***********************************************************
 
 
@@ -119,8 +135,8 @@ $(document).on('keyup', function (event) {
     const letterGuessed = event.key.toUpperCase();
     console.log(letterGuessed)
     // if (gameStatus === 'play') {
-        checkGuess(letterGuessed);
-        afterGuess();
+    checkGuess(letterGuessed);
+    afterGuess();
     // }
 })
 // ***********************************************************
@@ -140,7 +156,7 @@ let checkGuess = function (guess) {
 
     // If guess has already been guessed
     else if (wrongGuesses.includes(guess) || blanksMixedGuesses.includes(guess)) {
-        alert("Letter already guessed!");
+        // alert("Letter already guessed!");
     }
 
     // If Letter Guessed IS in the word
@@ -154,7 +170,7 @@ let checkGuess = function (guess) {
         }
         for (i = 0; i < nameLast.length; i++) {
             if (guess == nameLast[i]) {
-                blanksMixedGuesses[ nameFirst.length + 1 + i ] = guess
+                blanksMixedGuesses[nameFirst.length + 1 + i] = guess
             }
         }
     }
@@ -167,7 +183,6 @@ let checkGuess = function (guess) {
         console.log(wrongGuesses);
         // $('lettersGuessesd').HTML(wrongGuesses.join(", "));
     };
-console.log(blanksMixedGuesses)
 }
 // ***********************************************************
 ///  ^^^^^^^^^^^^^^^^^ CHECK GUESS FUNCTION ^^^^^^^^^^^^^^^^^^^
@@ -186,7 +201,7 @@ let afterGuess = function () {
     }
     // // Checks to see if any blanks are remaining and game is won
     if (!blanksMixedGuesses.includes("_")) {
-        youWin()
+        setTimeout(youWin(), 1500)
     }
 }
 // ***********************************************************
@@ -197,16 +212,17 @@ let afterGuess = function () {
 // ***********************************************************
 //                  GIVE HINT BUTTON FUNCTION
 // ***********************************************************
-$('#hint').on('click', function () {
-
-
-
-})
+let hintNum = 0
+$("#hint").on("click", function () {
+    console.log('give hint clicked');
+    let oldPoster = $('#mainPoster').attr('src');
+    $('#hint' + hintNum++).attr('src', oldPoster);
+    $('#mainPoster').attr('src', posterSources[hintnum++]);
+  });
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ GIVE HINT BUTTON FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
-imgTag.src = posterSources[0];
 
 // ***********************************************************
 //                  YOU WIN FUNCTION
@@ -230,9 +246,21 @@ let youLose = function () {
     losses++;
 }
 // ***********************************************************
-//  ^^^^^^^^^^^^^^ YOU LOSEE FUNCTION ^^^^^^^^^^^^^^^^
+//  ^^^^^^^^^^^^^^ YOU LOSE FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
+
+// ***********************************************************
+//                  RESET GAME FUNCTION
+// ***********************************************************
+let resetGame = function () {
+
+    pickActor()
+
+}
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ RESET GAME FUNCTION ^^^^^^^^^^^^^^^^
+// ***********************************************************
 
 
 
