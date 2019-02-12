@@ -75,11 +75,81 @@ $.ajax({
         console.log(response.results[0].known_for)
         // loop through popular movies to get 3 movie poster source URL's
         for (i in response.results[0].known_for){
-            posterSources.push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path)
+
+        //img tag, src from below, append to the div with the demo container class
+        var imgURL = response.Poster;
+        // Creating an image tag, element to hold the image
+        var img = $("<img>").attr("src", 'https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path);
+        //append to the div
+        $('#moviecontainer').append(img);
+        
+        posterSources.push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path)
             
     }
     console.log(posterSources)
-})
+
+
+/****** Started writing an if/else if statement here
+
+    if (response.pagination.total_count >= 1) {
+            .push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path);
+            posterSources.push(); }
+        else if (response.pagination.total_count === 0) {
+            $("#entry").html(" Sorry, there were no results for this.  Please try again."); }
+*/
+
+
+//This is the div that holds the posters
+//moviecontainer
+var block_to_insert ;
+var container_block ;
+ 
+block_to_insert = document.createElement( 'div' );
+block_to_insert.innerHTML = '' ;
+container_block = document.getElementById( 'moviecontainer' );
+container_block.appendChild( block_to_insert );
+
+});
+
+
+
+
+
+  
+
+
+
+
+
+    //LIST MOVIES FROM AJAX IN HTML CONTAINER
+
+
+
+     /*$.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+      // Create a new table row element
+      var tRow = $("<tr>");
+
+      // Methods run on jQuery selectors return the selector they we run on
+      // This is why we can create and save a reference to a td in the same statement we update its text
+      var titleTd = $("<td>").text(response.Title);
+      var yearTd = $("<td>").text(response.Year);
+      var actorsTd = $("<td>").text(response.Actors);
+        
+      // Append the newly created table data to the table row
+      tRow.append(titleTd, yearTd, actorsTd);
+      // Append the table row to the table body
+      $("tbody").append(tRow);
+    });*/
+
+
+
+
+
+
+
     //   ^^^^^^   AJAX CALL MOVIES ^^^^^^
     //***************************************
 })
@@ -118,7 +188,3 @@ $('#hint').on('click', function () {
 // *************************************************************************************************************************
 // ^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^
 // *************************************************************************************************************************
-
-
-
-
