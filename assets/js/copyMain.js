@@ -25,7 +25,7 @@ let wrongGuesses = [];
 
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
-
+       
 
 // *************************************************************************************************************************
 //              EVENT HANDLERS                           EVENT HANDLERS                           EVENT HANDLERS
@@ -34,6 +34,11 @@ let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 // ***********************************************************
 //                   START BUTTON FUNCTION
 // ***********************************************************
+// function generateHTML(){
+//     gameHTML = 
+
+// 	$(".gamecontent").html(gameHTML);
+// }
 
 //********************************************
 //            AJAX CALL ACTORS
@@ -86,7 +91,7 @@ let pickActor = function () {
     for (i = 0; i < nameFirst.length; i++) {
         blanksMixedGuesses.push('_')
     }
-    blanksMixedGuesses.push('<br>')
+    blanksMixedGuesses.push(' ')
     for (i = 0; i < nameLast.length; i++) {
         blanksMixedGuesses.push('_')
     }
@@ -122,10 +127,6 @@ let pickActor = function () {
     //   ^^^^^^   AJAX CALL MOVIES ^^^^^^
     //***************************************
 
-
-// ***********************************************************
-//  ^^^^^^^^^^^^^^ PICK / DISPLAY ACTOR FUNCTION ^^^^^^^^^^^^^
-// ***********************************************************
 
 // ^^^^^^^^^^^   Youtube IFrame Player API   ^^^^^^^^^
 //************************************************************
@@ -196,7 +197,16 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
         player.stopVideo();
       }
     });
-}
+    
+    }
+    
+    console.log("Video here: ", onYouTubeIframeAPIReady);
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ PICK / DISPLAY ACTOR FUNCTION ^^^^^^^^^^^^^
+// ***********************************************************
+
+    
+
 // ***********************************************************
 //                   ON KEY UP FUNCTION
 // ***********************************************************
@@ -220,12 +230,12 @@ let checkGuess = function (guess) {
 
     // If character entered is not A-Z
     if (!alphabet.includes(guess)) {
-        console.log("Enter a letter.")
+        // alert("Enter a letter.")
     }
 
     // If guess has already been guessed
     else if (wrongGuesses.includes(guess) || blanksMixedGuesses.includes(guess)) {
-        console.log("Letter already guessed!");
+        // alert("Letter already guessed!");
     }
 
     // If Letter Guessed IS in the word
@@ -250,7 +260,7 @@ let checkGuess = function (guess) {
         wrongGuesses.push(guess);
         guessesLeft--;
         console.log(wrongGuesses);
-        $('#lettersGuessed').html(wrongGuesses.join(", "));
+        // $('lettersGuessesd').HTML(wrongGuesses.join(", "));
     };
 }
 // ***********************************************************
@@ -284,13 +294,8 @@ let afterGuess = function () {
 let hintNum = 0
 $("#hint").on("click", function () {
     console.log('give hint clicked');
-    // save old poster URL
     let oldPoster = $('#mainPoster').attr('src');
-    // move Hint 1 to Hint 2
-    $('#hint2').attr('src') = $('#hint1').attr('src')
-    // move old poster URL to Hint 1
     $('#hint' + hintNum++).attr('src', oldPoster);
-    // set current hint to new poster
     $('#mainPoster').attr('src', posterSources[hintnum++]);
   });
 // ***********************************************************
@@ -302,7 +307,7 @@ $("#hint").on("click", function () {
 //                  YOU WIN FUNCTION
 // ***********************************************************
 let youWin = function () {
-    console.log('you win!')
+    alert('you win!')
     gameStatus = "over";
     wins++;
 }
@@ -315,7 +320,7 @@ let youWin = function () {
 //                  YOU LOSE FUNCTION
 // ***********************************************************
 let youLose = function () {
-    console.log('you lose')
+    alert('you lose')
     gameStatus = "over";
     losses++;
 }
@@ -328,14 +333,6 @@ let youLose = function () {
 //                  RESET GAME FUNCTION
 // ***********************************************************
 let resetGame = function () {
-    movies = [];
-    posterSources = [];
-    gameStatus = 'start';
-    currentActor = '';
-    nameFirst = '';
-    nameLast = '';
-    blanksMixedGuesses = [];
-    wrongGuesses = [];
 
     pickActor()
 
@@ -349,7 +346,21 @@ let resetGame = function () {
 // *************************************************************************************************************************
 // ^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^
 // *************************************************************************************************************************
+// $(document).ready(function(){
 
+//     //creating start button and initial screen before game
+//     function initialScreen(){
+//         startScreen = "<p class='text-center main-button-container'><a class='btn btn-warning btn-lg btn-block start-button' href='#' role='button'>Start Game</a></p>";
+//         $(".gamecontent").html(startScreen);
+//     }
+//         initialScreen();
+    
+//     //game action when start button is clicked, game starts as new html section in body is displayed.
+//     $("body").on("click",".start-button", function(event){
+//         generateHTML();
+    
+        
+//     });
 
-
+// });
 
