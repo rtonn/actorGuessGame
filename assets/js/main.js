@@ -282,17 +282,30 @@ let afterGuess = function () {
 //                  GIVE HINT BUTTON FUNCTION
 // ***********************************************************
 let hintNum = 0
+$(document).ready(function(){
+// display hintNum
+    $('#hintNum').html(hintNum+1);
 $("#hint").on("click", function () {
     console.log('give hint clicked');
+    if (hintNum < 2) {
+    hintNum++;
+    // update hintNum
+    $('#hintNum').html(hintNum+1);
     // save old poster URL
     let oldPoster = $('#mainPoster').attr('src');
     // move Hint 1 to Hint 2
-    $('#hint2').attr('src') = $('#hint1').attr('src')
+    hint2src = $('#hint2').attr('src')
+    $('#hint1').attr('src', hint2src)
     // move old poster URL to Hint 1
-    $('#hint' + hintNum++).attr('src', oldPoster);
+    $('#hint' + hintNum).attr('src', oldPoster);
     // set current hint to new poster
-    $('#mainPoster').attr('src', posterSources[hintnum++]);
+    console.log(posterSources[1])
+    console.log(hintNum)
+    console.log(posterSources[hintNum])
+    $('#mainPoster').attr('src', posterSources[hintNum]);
+    }
   });
+})
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ GIVE HINT BUTTON FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
