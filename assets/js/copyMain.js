@@ -131,11 +131,11 @@ let pickActor = function () {
 // ^^^^^^^^^^^   Youtube IFrame Player API   ^^^^^^^^^
 //************************************************************
 // 2. This code loads the IFrame Player API code asynchronously.
-var tag = document.createElement('script');
+// var tag = document.createElement('script');
 
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+// tag.src = "https://www.youtube.com/iframe_api";
+// var firstScriptTag = document.getElementsByTagName('script')[0];
+// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 //  ^^^^^^^ Youtube DATA API AJAX CAll ^^^^^^
     //****************************************
@@ -143,7 +143,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     console.log("These are the actors: ", actors);
     console.log("Chosen actor: ", currentActor);
     
-      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyBrzKLtjFT0Is0eyvC1ppdjZSMhp4mtpQ0";
+      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyBfVryZs6rJydd-tzrcOkNwmdmhFXUi7GY";
 
       $.ajax({
         url: queryURL,
@@ -168,39 +168,39 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
         player = new YT.Player('player', {
             height: '280',
-            width: '100%',
+            width: '380',
             // videoId: 'vo5cB94nPRU',
             videoId: results2,
-            events: {
-            'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
-            }
+            // events: {
+            // 'onReady': onPlayerReady,
+            // 'onStateChange': onPlayerStateChange
+            // }
         });
     
 
-     // 4. The API will call this function when the video player is ready.
-     function onPlayerReady(event) {
-        event.target.playVideo();
-      }
+    //  // 4. The API will call this function when the video player is ready.
+    //  function onPlayerReady(event) {
+    //     event.target.playVideo();
+    //   }
 
-      // 5. The API calls this function when the player's state changes.
-      //    The function indicates that when playing a video (state=1),
-      //    the player should play for six seconds and then stop.
-      var done = false;
-      function onPlayerStateChange(event) {
-        if (event.data == YT.PlayerState.PLAYING && !done) {
-          setTimeout(stopVideo, 10000);
-          done = true;
-        }
-      }
-      function stopVideo() {
-        player.stopVideo();
-      }
+    //   // 5. The API calls this function when the player's state changes.
+    //   //    The function indicates that when playing a video (state=1),
+    //   //    the player should play for six seconds and then stop.
+    //   var done = false;
+    //   function onPlayerStateChange(event) {
+    //     if (event.data == YT.PlayerState.PLAYING && !done) {
+    //       setTimeout(stopVideo, 10000);
+    //       done = true;
+    //     }
+    //   }
+    //   function stopVideo() {
+    //     player.stopVideo();
+    //   }
     });
     
     }
     
-    console.log("Video here: ", onYouTubeIframeAPIReady);
+    // console.log("Video here: ", onYouTubeIframeAPIReady);
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ PICK / DISPLAY ACTOR FUNCTION ^^^^^^^^^^^^^
 // ***********************************************************
