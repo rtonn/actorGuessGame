@@ -10,12 +10,12 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="assets/css/main.css" />
-  
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="https://unpkg.com/youtube-api-v3-search@1.2.1/dist/youtube-api-v3-search.min.js"></script>
+
   <script type="text/javascript" src="assets/js/light.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script type="text/javascript" src="assets/js/main.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://unpkg.com/youtube-api-v3-search@1.2.1/dist/youtube-api-v3-search.min.js"></script>
+  <script type="text/javascript" src="assets/js/copyMain.js"></script>
   <!--Facebook Share Button Code-->
   <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
   <meta property="og:type" content="website" />
@@ -91,18 +91,23 @@
     </div>
   </div>
 
-  
+<div class="container mb-4">
+    <div class="movieTrailer mb-4">
+        <div id="player"></div>
+        <!-- <iframe id="player" type="text/html" width="100%" height="280"
+        src="http://www.youtube.com/embed/gqvS6zD6XQY?enablejsapi=1&origin=http://example.com"
+        frameborder="0"></iframe> -->
+    </div>
+</div>
 
   <div class="gamecontent">
 
     <div class="w3-row">
       <div class="w3-third w3-container">
-
+        <p class="type">Current genre and hint will go here</p>
       </div>
-          <div id="player"></div>
 
       <div class="w3-third w3-container">
-        <p class="type">Hint #<span id='hintNum'></span></p>
         <img id='mainPoster' src='' height='272px' width='176px'/>
       </div>
 
@@ -116,7 +121,7 @@
     <div class="w3-row">
       <div class="w3-rest w3-container">
         <h1 class="type" id="blankWord"></h1>
-        <h3 class="type">Letters Guessed: <strong id="lettersGuessed"></strong></h3>
+        <h3 class="type">Letters Guessed: <strong id="letters-guessed"></strong></h3>
       </div>
 
       <div class="w3-row">
