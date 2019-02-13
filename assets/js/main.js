@@ -1,4 +1,6 @@
 
+//sessionStorage.clear();
+
 // DECLARE VARIABLES
 let guessesLeft = 10;
 let score = 0;
@@ -365,7 +367,41 @@ let youLose = function () {
 //  ^^^^^^^^^^^^^^ YOU LOSE FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ SCORING FUNCTION ^^^^^^^^^^^^^^^^
+// ***********************************************************
 
+// display Top Score & High Score stored in local & session storage
+
+var localScore = parseInt(localStorage.score); 
+        console.log(localScore); 
+$("#topScore").text(localStorage.getItem("score")); 
+
+var sessionScore = parseInt(sessionStorage.score); 
+        console.log(sessionScore); 
+$("#highScore").text(sessionStorage.getItem("score")); 
+
+var userScore = score; 
+    $("#userScore").text(userScore); 
+
+    
+function topScore() {
+    if (userScore > localScore || isNaN(localScore)) {
+            localStorage.setItem("score", userScore)
+            $("#topScore").text(localStorage.getItem("score"));
+    }}; 
+
+
+
+function highScore() {
+    if (userScore > sessionScore || isNaN(sessionScore)) {
+        sessionStorage.setItem("score", userScore); 
+        $("#highScore").text(sessionStorage.getItem("score"));
+    }}; 
+
+highScore(); 
+topScore(); 
+       
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
 // ***********************************************************
