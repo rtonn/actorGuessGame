@@ -86,7 +86,7 @@ let pickActor = function () {
     for (i = 0; i < nameFirst.length; i++) {
         blanksMixedGuesses.push('_')
     }
-    blanksMixedGuesses.push(' ')
+    blanksMixedGuesses.push('<br>')
     for (i = 0; i < nameLast.length; i++) {
         blanksMixedGuesses.push('_')
     }
@@ -151,12 +151,12 @@ let checkGuess = function (guess) {
 
     // If character entered is not A-Z
     if (!alphabet.includes(guess)) {
-        // alert("Enter a letter.")
+        console.log("Enter a letter.")
     }
 
     // If guess has already been guessed
     else if (wrongGuesses.includes(guess) || blanksMixedGuesses.includes(guess)) {
-        // alert("Letter already guessed!");
+        console.log("Letter already guessed!");
     }
 
     // If Letter Guessed IS in the word
@@ -181,7 +181,7 @@ let checkGuess = function (guess) {
         wrongGuesses.push(guess);
         guessesLeft--;
         console.log(wrongGuesses);
-        // $('lettersGuessesd').HTML(wrongGuesses.join(", "));
+        $('#lettersGuessed').html(wrongGuesses.join(", "));
     };
 }
 // ***********************************************************
@@ -215,8 +215,13 @@ let afterGuess = function () {
 let hintNum = 0
 $("#hint").on("click", function () {
     console.log('give hint clicked');
+    // save old poster URL
     let oldPoster = $('#mainPoster').attr('src');
+    // move Hint 1 to Hint 2
+    $('#hint2').attr('src') = $('#hint1').attr('src')
+    // move old poster URL to Hint 1
     $('#hint' + hintNum++).attr('src', oldPoster);
+    // set current hint to new poster
     $('#mainPoster').attr('src', posterSources[hintnum++]);
   });
 // ***********************************************************
@@ -228,7 +233,7 @@ $("#hint").on("click", function () {
 //                  YOU WIN FUNCTION
 // ***********************************************************
 let youWin = function () {
-    alert('you win!')
+    console.log('you win!')
     gameStatus = "over";
     wins++;
 }
@@ -241,7 +246,7 @@ let youWin = function () {
 //                  YOU LOSE FUNCTION
 // ***********************************************************
 let youLose = function () {
-    alert('you lose')
+    console.log('you lose')
     gameStatus = "over";
     losses++;
 }
@@ -254,6 +259,14 @@ let youLose = function () {
 //                  RESET GAME FUNCTION
 // ***********************************************************
 let resetGame = function () {
+    movies = [];
+    posterSources = [];
+    gameStatus = 'start';
+    currentActor = '';
+    nameFirst = '';
+    nameLast = '';
+    blanksMixedGuesses = [];
+    wrongGuesses = [];
 
     pickActor()
 
