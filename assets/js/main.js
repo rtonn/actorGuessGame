@@ -11,6 +11,9 @@ let actors = [];
 // array of movies selected actor is in
 let movies = [];
 
+// popular movies for carousel
+let popMovies = [];
+
 let posterSources = [];
 
 let gameStatus = 'start';
@@ -25,11 +28,35 @@ let wrongGuesses = [];
 
 let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 
+var key = 'a2263fe97d8f900e28e6323428ce7aa9'
+
 
 
 // *************************************************************************************************************************
 //              EVENT HANDLERS                           EVENT HANDLERS                           EVENT HANDLERS
 // *************************************************************************************************************************
+
+
+    //***************************************
+    //       AJAX POPULAR MOVIES
+
+    // SEARCH MOVIES URL
+    queryURL = 'https://api.themoviedb.org/3/movie/popular?api_key=' + key + '&language=en-US&page=1'
+
+
+    // SEARCH MOVIES AJAX CALL
+    $.ajax({
+        url: queryURL,
+        method: 'GET'
+    }).then(function (response) {
+        for (i in response.results) {
+            popMovies.push('https://image.tmdb.org/t/p/w1280/' + response.results[i].poster_path)
+        }
+    })
+
+    // ^^^^ AJAX POPULAR MOVIES ^^^^
+    //***************************************
+
 
 // ***********************************************************
 //                   START BUTTON FUNCTION
@@ -37,8 +64,6 @@ let alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
 
 //********************************************
 //            AJAX CALL ACTORS
-
-var key = 'a2263fe97d8f900e28e6323428ce7aa9'
 
 // SEARCH ACTORS URL
 var queryURL = 'https://api.themoviedb.org/3/person/popular?page=1' +
@@ -65,6 +90,7 @@ $.ajax({
 //  ^^^^^^^^^^^^^^^^ START BUTTON FUNCTION ^^^^^^^^^^^^^^^^^^
 // ***********************************************************
 
+let roundScore = 90;
 
 // ***********************************************************
 //               PICK / DISPLAY ACTOR FUNCTION
@@ -78,8 +104,10 @@ let pickActor = function () {
 
     // make sure actor hasn't already been used
 
+    currentActor.replace('-',' ')
     nameFirst = currentActor.split(' ')[0];
-    nameLast = currentActor.split(' ')[1];
+    nameLast = currentActor.split(' ')[currentActor.split(' ').length - 1];
+
     console.log('currentActor: ', currentActor)
     console.log('numBlanks first & last: ', nameFirst.length, nameLast.length)
     // fill blanksMixedGuesses based on currentActor
@@ -93,6 +121,7 @@ let pickActor = function () {
     // Send blanksMixedGuesses to DOM
     $('#blankWord').html(blanksMixedGuesses.join(' '))
     console.log('mixed', blanksMixedGuesses)
+    
 
     //***************************************
     //       AJAX SEARCH FOR ACTORS MOVIES
@@ -108,7 +137,7 @@ let pickActor = function () {
         url: queryURL,
         method: 'GET'
     }).then(function (response) {
-        console.log(response.results[0].known_for)
+        console.log(response.results[0])
         // loop through popular movies to get 3 movie poster source URL's
         for (i in response.results[0].known_for) {
             posterSources.push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path)
@@ -119,7 +148,7 @@ let pickActor = function () {
         $('#mainPoster').attr('src', posterSources[0])
     })
 
-    //   ^^^^^^   AJAX CALL MOVIES ^^^^^^
+    // ^^^^ AJAX SEARCH FOR ACTORS MOVIES ^^^^
     //***************************************
 
 }
@@ -220,8 +249,10 @@ $("#hint").on("click", function () {
     console.log('give hint clicked');
     if (hintNum < 2) {
     hintNum++;
-    // update hintNum
+    // update hintNum display
     $('#hintNum').html(hintNum+1);
+    // reduce roundScore
+    roundScore -= 30;
     // save old poster URL
     let oldPoster = $('#mainPoster').attr('src');
     // move Hint 1 to Hint 2
@@ -230,9 +261,6 @@ $("#hint").on("click", function () {
     // move old poster URL to Hint 1
     $('#hint' + hintNum).attr('src', oldPoster);
     // set current hint to new poster
-    console.log(posterSources[1])
-    console.log(hintNum)
-    console.log(posterSources[hintNum])
     $('#mainPoster').attr('src', posterSources[hintNum]);
     }
   });
@@ -249,9 +277,10 @@ let youWin = function () {
     console.log('you win!')
     gameStatus = "over";
     wins++;
+    gameScore+= roundScore;
 }
 // ***********************************************************
-//  ^^^^^^^^^^^^^^ YOU WIN FUNCTION ^^^^^^^^^^^^^^^^
+//  ^^^^^^^^^^^^^^^^^^ YOU WIN FUNCTION ^^^^^^^^^^^^^^^^^^
 // ***********************************************************
 
 
@@ -269,9 +298,9 @@ let youLose = function () {
 
 
 // ***********************************************************
-//                  RESET GAME FUNCTION
+//                    NEXT ROUND FUNCTION
 // ***********************************************************
-let resetGame = function () {
+let nextRound = function () {
     movies = [];
     posterSources = [];
     gameStatus = 'start';
@@ -283,6 +312,18 @@ let resetGame = function () {
 
     pickActor()
 
+}
+// ***********************************************************
+//  ^^^^^^^^^^^^^^^^^^ NEXT ROUND FUNCTION ^^^^^^^^^^^^^^^^^^^
+// ***********************************************************
+
+
+// ***********************************************************
+//                  RESET GAME FUNCTION
+// ***********************************************************
+let resetGame = function () {
+   nextRound()
+   
 }
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ RESET GAME FUNCTION ^^^^^^^^^^^^^^^^
