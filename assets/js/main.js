@@ -173,7 +173,7 @@ let pickActor = function () {
     console.log("These are the actors: ", actors);
     console.log("Chosen actor: ", currentActor);
     
-      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyBfVryZs6rJydd-tzrcOkNwmdmhFXUi7GY";
+      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyCObVmbM58d44kvf_IfR1lKwzvPtgdzodo";
 
       $.ajax({
         url: queryURL,
@@ -197,8 +197,8 @@ let pickActor = function () {
         window.onYouTubeIframeAPIReady = function() { } 
 
         player = new YT.Player('player', {
-            height: '280',
-            width: '380',
+            height: '300',
+            width: '420',
             // videoId: 'vo5cB94nPRU',
             videoId: results2,
             // events: {
