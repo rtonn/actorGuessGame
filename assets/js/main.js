@@ -83,9 +83,9 @@ $(document).ready(function () {
         )
         // create scoreboard
         $('#scoreboard').html(
-            `<h1 class='roundNum'>Round ${roundNumber}</h1>
-            <h1 class="type">Score: ${gameScore}</h1>
-            <h3 id='score'></h3>`
+            `<h1 class='gameType' id='roundNum'>Round ${roundNumber}</h1>
+            <h1 class="gameType">Score: ${gameScore}</h1>
+            <h3 id='score' class='gameType></h3>`
         )
         $('#guesses').html(
             ` <h3 class="type">Letters Guessed: <strong id="lettersGuessed"></strong></h3>`
@@ -408,6 +408,8 @@ let youWin = function () {
     gameStatus = "over";
     wins++;
     gameScore += roundScore;
+    // show nextround button
+    $('#scoreboard').append(`<button id='nextRound'>Next Round</button>`)
     // update score display
     // show correct actor image
     $('#mainPoster').attr('src', 'https://image.tmdb.org/t/p/w1280/' + photoSrc)
@@ -426,6 +428,8 @@ let youLose = function () {
     console.log('you lose')
     gameStatus = "over";
     losses++;
+    // show nextround button
+    $('#scoreboard').append(`<button id='nextRound'>Next Round</button>`)
     // show correct answer
     $('#blankWord').text(currentActor);
     // show actor image
