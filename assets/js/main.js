@@ -226,7 +226,7 @@ let pickActor = function () {
     console.log("These are the actors: ", actors);
     console.log("Chosen actor: ", currentActor);
     
-      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyCObVmbM58d44kvf_IfR1lKwzvPtgdzodo";
+      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyDgWAsjWKPvrtA1W_FUkK1pEK_jHVfdVDc";
 
       $.ajax({
         url: queryURL,
