@@ -435,44 +435,31 @@ let youLose = function () {
 // ***********************************************************
 
 // ***********************************************************
-//  ^^^^^^^^^^^^^^ SCORING FUNCTION ^^^^^^^^^^^^^^^^
+//                 SCORING FUNCTION 
 // ***********************************************************
 
-// display Top Score & High Score stored in local & session storage
+// display High Score stored in local storage
 
-var localScore = parseInt(localStorage.score); 
-        console.log(localScore); 
+var highScore = parseInt(localStorage.highScore); 
 $("#topScore").text(localStorage.getItem("score")); 
 
-var sessionScore = parseInt(sessionStorage.score); 
-        console.log(sessionScore); 
-$("#highScore").text(sessionStorage.getItem("score")); 
-
-var userScore = score; 
-    $("#userScore").text(userScore); 
-
-    
-function topScore() {
-    if (userScore > localScore || isNaN(localScore)) {
-            localStorage.setItem("score", userScore)
-            $("#topScore").text(localStorage.getItem("score"));
-    }}; 
-
-
+ $("#userScore").text(gameScore); 
 
 function highScore() {
-    if (userScore > sessionScore || isNaN(sessionScore)) {
-        sessionStorage.setItem("score", userScore); 
-        $("#highScore").text(sessionStorage.getItem("score"));
+    if (gameScore > localScore) {
+        localStorage.setItem("score", gameScore); 
+        $("#highScore").text(gameScore);
     }}; 
 
-highScore(); 
-topScore(); 
        
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
 // ***********************************************************
 let nextRound = function () {
+    if (roundNumber = 5){
+        highScore()
+    }
+    roundNumber++;
     clearAll();
     pickActor();
 
