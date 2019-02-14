@@ -10,18 +10,18 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link href="https://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet">
   <link rel="stylesheet" media="screen" href="assets/css/main.css" />
-  
-  <script src="https://www.youtube.com/iframe_api"></script>
-  <script src="https://unpkg.com/youtube-api-v3-search@1.2.1/dist/youtube-api-v3-search.min.js"></script>
+
   <script type="text/javascript" src="assets/js/light.js"></script>
   <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <script type="text/javascript" src="assets/js/main.js"></script>
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script src="https://unpkg.com/youtube-api-v3-search@1.2.1/dist/youtube-api-v3-search.min.js"></script>
+  <script type="text/javascript" src="assets/js/copyMain.js"></script>
   <!--Facebook Share Button Code-->
-  <meta property="og:url" content="https://www.your-domain.com/index.html" />
+  <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Lights, Camera, Actor!" />
-  <meta property="og:description" content="Hollywood's Top Guessing Game" />
-  <meta property="og:image" content="https://www.your-domain.com/assets/images/image.jpg" />
+  <meta property="og:title" content="Your Website Title" />
+  <meta property="og:description" content="Your description" />
+  <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
 </head>
 
 <body>
@@ -77,12 +77,13 @@
         <p>.</p>
       </div>
       <div class="w3-half">
-        <p class="type">You get 10 guesses in this hangman-style actor guessing game.<br>
-          You will be shown up to 3 movie hints to help you guess the actor.<br>
+        <p class="type">You get 10 guesses in this hangman-style actor guessing game!<br>
+           You will be shown up to 3 movie hints to help you guess the actor!<br>
+          
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet orci risus. Vestibulum
+          non tristique lectus.
 
-          Earn points by answering correctly. The more hints you use, the less points you get.
-
-          <br>Press Start below and begin typing to play!</p>
+        <br>Start typing to begin!</p>
         <div class="w3-quarter">
           <p>.</p>
         </div>
@@ -90,55 +91,45 @@
     </div>
   </div>
 
-
-  
+<div class="container mb-4">
+    <div class="movieTrailer mb-4">
+        <div id="player"></div>
+        <!-- <iframe id="player" type="text/html" width="100%" height="280"
+        src="http://www.youtube.com/embed/gqvS6zD6XQY?enablejsapi=1&origin=http://example.com"
+        frameborder="0"></iframe> -->
+    </div>
+</div>
 
   <div class="gamecontent">
 
     <div class="w3-row">
+      <div class="w3-third w3-container">
+        <p class="type">Current genre and hint will go here</p>
+      </div>
 
       <div class="w3-third w3-container">
-        <div id="player">
-        </div>
-
+        <img id='mainPoster' src='' height='272px' width='176px'/>
       </div>
 
-
-      <div class="w3-third w3-container" id='posterContainer'>
-        <button id='startGame'>Start Game</button>
-      </div>
-
-      <div class="w3-third w3-container" id='hints'>
+      <div class="w3-third w3-container">
+        <button id="hint">Give hint!</button>
+        <img id='hint1' height='136px' width='88px'>
+        <img id='hint2' height='136px' width='88px'>
       </div>
 
     </div>
-
-
     <div class="w3-row">
-
-      <div class="w3-third w3-container" id='scoreboard'>
-      
-      </div>
-
-      <div class="w3-third w3-container" id='word'>
-        <h1 class="type" id="blankWord"></h1>
-      </div>
-      
-      <div class="w3-rest w3-container" id='guesses'>
-        </div>
-
-    </div>
-
-
-    <div class="w3-row">
-
       <div class="w3-rest w3-container">
-        <p class="type">Carousel will go here</p>
+        <h1 class="type" id="blankWord"></h1>
+        <h3 class="type">Letters Guessed: <strong id="letters-guessed"></strong></h3>
       </div>
 
+      <div class="w3-row">
+        <div class="w3-rest w3-container">
+          <p class="type">Carousel will go here</p>
+        </div>
+      </div>
     </div>
-
-
   </div>
 
 
@@ -147,7 +138,7 @@
   <div class="footer">
     <div class="w3-row">
       <div class="w3-third">
-        <a href="facebook" src="assets/images/facebook.png" target="blank">
+        <a href="facebook" src="assets/img/facebook.png" target="blank">
       </div>
 
 
