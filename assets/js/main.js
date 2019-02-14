@@ -1,7 +1,7 @@
 
 // DECLARE VARIABLES
 let guessesLeft = 10;
-let score = 0;
+let gameScore = 0;
 let wins = 0;
 let losses = 0;
 
@@ -16,13 +16,17 @@ let popMovies = [];
 
 let posterSources = [];
 
-let gameStatus = 'start';
+let gameStatus = 'over';
 
 let currentActor = '';
 let nameFirst = '';
 let nameLast = '';
+let actorID = '';
+let photoSrc = '';
 
 let blanksMixedGuesses = [];
+
+let roundNumber = 1;
 
 let wrongGuesses = [];
 
@@ -37,55 +41,84 @@ var key = 'a2263fe97d8f900e28e6323428ce7aa9'
 // *************************************************************************************************************************
 
 
-    //***************************************
-    //       AJAX POPULAR MOVIES
+//***************************************
+//       AJAX POPULAR MOVIES
 
-    // SEARCH MOVIES URL
-    queryURL = 'https://api.themoviedb.org/3/movie/popular?api_key=' + key + '&language=en-US&page=1'
+// SEARCH MOVIES URL
+queryURL = 'https://api.themoviedb.org/3/movie/popular?api_key=' + key + '&language=en-US&page=1'
 
 
-    // SEARCH MOVIES AJAX CALL
-    $.ajax({
-        url: queryURL,
-        method: 'GET'
-    }).then(function (response) {
-        for (i in response.results) {
-            popMovies.push('https://image.tmdb.org/t/p/w1280/' + response.results[i].poster_path)
-        }
-    })
+// SEARCH MOVIES AJAX CALL
+$.ajax({
+    url: queryURL,
+    method: 'GET'
+}).then(function (response) {
+    for (i in response.results) {
+        popMovies.push('https://image.tmdb.org/t/p/w1280/' + response.results[i].poster_path)
+    }
+})
 
-    // ^^^^ AJAX POPULAR MOVIES ^^^^
-    //***************************************
+// ^^^^ AJAX POPULAR MOVIES ^^^^
+//***************************************
 
 
 // ***********************************************************
 //                   START BUTTON FUNCTION
 // ***********************************************************
 
-//********************************************
-//            AJAX CALL ACTORS
+$(document).ready(function () {
+    $('#startGame').on('click', function () {
+        gameStatus = 'play';
+        console.log('start game clicked')
 
-// SEARCH ACTORS URL
-var queryURL = 'https://api.themoviedb.org/3/person/popular?page=1' +
-    '&language=en-US&api_key=' + key
+        // create poster and hint elements
+        $('#posterContainer').html(
+            `<p class="type">Hint #<span id='hintNum'></span></p>
+            <img id='mainPoster' src='' height='272px' width='176px'/>`
+        )
+        $('#hints').html(
+            `<button id="hint">Give hint!</button>`
+        )
+        // create scoreboard
+        $('#scoreboard').html(
+            `<h1 class='roundNum'>Round ${roundNumber}</h1>
+            <h1 class="type">Score: ${gameScore}</h1>
+            <h3 id='score'></h3>`
+        )
+        $('#guesses').html(
+            ` <h3 class="type">Letters Guessed: <strong id="lettersGuessed"></strong></h3>`
+        )
+        // scroll game into view
+        $('html, body').animate({
+            scrollTop: ($('#posterContainer').offset().top)
+        }, 500);
 
-// SEARCH ACTORS AJAX CALL
-$.ajax({
-    url: queryURL,
-    method: 'GET'
-}).then(function (response) {
-    // loop through response to return array of actor names
-    for (i in response.results) {
-        actors.push(response.results[i].name)
-    }
-    console.log(actors)
+        //********************************************
+        //            AJAX CALL ACTORS
 
-    pickActor()
+        // SEARCH ACTORS URL
+        var queryURL = 'https://api.themoviedb.org/3/person/popular?page=1' +
+            '&language=en-US&api_key=' + key
 
+        // SEARCH ACTORS AJAX CALL
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function (response) {
+            // loop through response to return array of actor names
+            for (i in response.results) {
+                actors.push(response.results[i].name)
+            }
+            console.log(actors)
+
+            pickActor()
+
+        })
+        //     ^^^^^^   AJAX CALL ACTORS ^^^^^^
+        //***********************************************
+
+    })
 })
-//     ^^^^^^   AJAX CALL ACTORS ^^^^^^
-//***********************************************
-
 // ***********************************************************
 //  ^^^^^^^^^^^^^^^^ START BUTTON FUNCTION ^^^^^^^^^^^^^^^^^^
 // ***********************************************************
@@ -104,7 +137,7 @@ let pickActor = function () {
 
     // make sure actor hasn't already been used
 
-    currentActor.replace('-',' ')
+    currentActor.replace('-', ' ')
     nameFirst = currentActor.split(' ')[0];
     nameLast = currentActor.split(' ')[currentActor.split(' ').length - 1];
 
@@ -121,7 +154,7 @@ let pickActor = function () {
     // Send blanksMixedGuesses to DOM
     $('#blankWord').html(blanksMixedGuesses.join(' '))
     console.log('mixed', blanksMixedGuesses)
-    
+
 
     //***************************************
     //       AJAX SEARCH FOR ACTORS MOVIES
@@ -137,15 +170,33 @@ let pickActor = function () {
         url: queryURL,
         method: 'GET'
     }).then(function (response) {
-        console.log(response.results[0])
+        console.log(response.results[0].id)
+        actorID = response.results[0].id
         // loop through popular movies to get 3 movie poster source URL's
         for (i in response.results[0].known_for) {
             posterSources.push('https://image.tmdb.org/t/p/w1280/' + response.results[0].known_for[i].poster_path)
         }
         console.log(posterSources)
-        
+
         // set main picture source
         $('#mainPoster').attr('src', posterSources[0])
+
+        //***************************************
+        //       AJAX SEARCH FOR ACTORS IMAGE
+
+        // SEARCH IMAGES URL
+        queryURL = 'https://api.themoviedb.org/3/person/' + actorID + '/images?api_key=' + key
+        console.log(queryURL)
+        // SEARCH IMAGES AJAX CALL
+        $.ajax({
+            url: queryURL,
+            method: 'GET'
+        }).then(function (response) {
+            photoSrc = response.profiles[0].file_path
+        })
+        //       AJAX SEARCH FOR ACTORS IMAGE
+        //***************************************
+
     })
 
     // ^^^^ AJAX SEARCH FOR ACTORS MOVIES ^^^^
@@ -160,13 +211,13 @@ let pickActor = function () {
 // ***********************************************************
 //                   ON KEY UP FUNCTION
 // ***********************************************************
+
 $(document).on('keyup', function (event) {
     const letterGuessed = event.key.toUpperCase();
-    console.log(letterGuessed)
-    // if (gameStatus === 'play') {
-    checkGuess(letterGuessed);
-    afterGuess();
-    // }
+    if (gameStatus === 'play') {
+        checkGuess(letterGuessed);
+        afterGuess();
+    }
 })
 // ***********************************************************
 ///  ^^^^^^^^^^^^^^^^^ ON KEY UP FUNCTION ^^^^^^^^^^^^^^^^^^^
@@ -214,7 +265,7 @@ let checkGuess = function (guess) {
     };
 }
 // ***********************************************************
-///  ^^^^^^^^^^^^^^^^^ CHECK GUESS FUNCTION ^^^^^^^^^^^^^^^^^^^
+/// ^^^^^^^^^^^^^^^^^ CHECK GUESS FUNCTION ^^^^^^^^^^^^^^^^^^^
 // ***********************************************************
 
 
@@ -242,33 +293,39 @@ let afterGuess = function () {
 //                  GIVE HINT BUTTON FUNCTION
 // ***********************************************************
 let hintNum = 0
-$(document).ready(function(){
-// display hintNum
-    $('#hintNum').html(hintNum+1);
-$("#hint").on("click", function () {
-    console.log('give hint clicked');
-    if (hintNum < 2) {
-    hintNum++;
-    // update hintNum display
-    $('#hintNum').html(hintNum+1);
-    // reduce roundScore
-    roundScore -= 30;
-    // save old poster URL
-    let oldPoster = $('#mainPoster').attr('src');
-    // move Hint 1 to Hint 2
-    hint2src = $('#hint2').attr('src')
-    $('#hint1').attr('src', hint2src)
-    // move old poster URL to Hint 1
-    $('#hint' + hintNum).attr('src', oldPoster);
-    // set current hint to new poster
-    $('#mainPoster').attr('src', posterSources[hintNum]);
-    }
-  });
+$(document).ready(function () {
+    // display hintNum
+    $('#hintNum').html(hintNum + 1);
+    $(document).on('click', '#hint', function () {
+        console.log('give hint clicked');
+        if (hintNum < 2) {
+            hintNum++;
+            // update hintNum display
+            $('#hintNum').html(hintNum + 1);
+            // display hint
+            $('#hints').append(
+                `<img id='hint${hintNum}' height='136px' width='88px' alt='movie poster hint'>`
+            )
+            // reduce roundScore
+            roundScore -= 30;
+            // save old poster URL
+            let oldPoster = $('#mainPoster').attr('src');
+            // move Hint 1 to Hint 2
+            hint2src = $('#hint2').attr('src')
+            $('#hint1').attr('src', hint2src)
+            // move old poster URL to Hint 1
+            $('#hint' + hintNum).attr('src', oldPoster);
+            // set current hint to new poster
+            $('#mainPoster').attr('src', posterSources[hintNum]);
+        }
+        if (hintNum === 2) {
+            $('#hint').remove()
+        }
+    });
 })
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ GIVE HINT BUTTON FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
-
 
 // ***********************************************************
 //                  YOU WIN FUNCTION
@@ -277,7 +334,12 @@ let youWin = function () {
     console.log('you win!')
     gameStatus = "over";
     wins++;
-    gameScore+= roundScore;
+    gameScore += roundScore;
+    // update score display
+    // show correct actor image
+    $('#mainPoster').attr('src', 'https://image.tmdb.org/t/p/w1280/' + photoSrc)
+    // display next round button
+
 }
 // ***********************************************************
 //  ^^^^^^^^^^^^^^^^^^ YOU WIN FUNCTION ^^^^^^^^^^^^^^^^^^
@@ -291,6 +353,11 @@ let youLose = function () {
     console.log('you lose')
     gameStatus = "over";
     losses++;
+    // show correct answer
+    $('#blankWord').text(currentActor);
+    // show actor image
+    $('#mainPoster').attr('src', 'https://image.tmdb.org/t/p/w1280/' + photoSrc)
+    // display next round button
 }
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ YOU LOSE FUNCTION ^^^^^^^^^^^^^^^^
@@ -301,16 +368,8 @@ let youLose = function () {
 //                    NEXT ROUND FUNCTION
 // ***********************************************************
 let nextRound = function () {
-    movies = [];
-    posterSources = [];
-    gameStatus = 'start';
-    currentActor = '';
-    nameFirst = '';
-    nameLast = '';
-    blanksMixedGuesses = [];
-    wrongGuesses = [];
-
-    pickActor()
+    clearAll();
+    pickActor();
 
 }
 // ***********************************************************
@@ -322,13 +381,40 @@ let nextRound = function () {
 //                  RESET GAME FUNCTION
 // ***********************************************************
 let resetGame = function () {
-   nextRound()
-   
+    nextRound();
+    score = 0;
+    // display start game button
+
 }
 // ***********************************************************
 //  ^^^^^^^^^^^^^^ RESET GAME FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
+
+// ***********************************************************
+//                  CLEAR ALL FUNCTION
+// ***********************************************************
+let clearAll = function () {
+
+    $('#hint1').html('');
+    $('#hint2').html('');
+    $('#posterContainer').html(
+        `<button id='startGame'>Start Game</button>`
+    );
+
+    movies = [];
+    posterSources = [];
+    gameStatus = 'start';
+    currentActor = '';
+    nameFirst = '';
+    nameLast = '';
+    blanksMixedGuesses = [];
+    wrongGuesses = [];
+
+}
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ CLEAR ALL FUNCTION ^^^^^^^^^^^^^^^^
+// ***********************************************************
 
 
 // *************************************************************************************************************************
