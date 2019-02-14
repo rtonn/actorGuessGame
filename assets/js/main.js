@@ -1,4 +1,6 @@
 
+//sessionStorage.clear();
+
 // DECLARE VARIABLES
 let guessesLeft = 10;
 let gameScore = 0;
@@ -222,7 +224,7 @@ let pickActor = function () {
     console.log("These are the actors: ", actors);
     console.log("Chosen actor: ", currentActor);
     
-      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyADSkhhHq8Y4hSUw8CeYRNyrlWrlzYxaUQ";
+      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyCObVmbM58d44kvf_IfR1lKwzvPtgdzodo";
 
       $.ajax({
         url: queryURL,
@@ -246,8 +248,8 @@ let pickActor = function () {
         window.onYouTubeIframeAPIReady = function() { } 
 
         player = new YT.Player('player', {
-            height: '280',
-            width: '380',
+            height: '300',
+            width: '420',
             // videoId: 'vo5cB94nPRU',
             videoId: results2,
             // events: {
@@ -432,7 +434,41 @@ let youLose = function () {
 //  ^^^^^^^^^^^^^^ YOU LOSE FUNCTION ^^^^^^^^^^^^^^^^
 // ***********************************************************
 
+// ***********************************************************
+//  ^^^^^^^^^^^^^^ SCORING FUNCTION ^^^^^^^^^^^^^^^^
+// ***********************************************************
 
+// display Top Score & High Score stored in local & session storage
+
+var localScore = parseInt(localStorage.score); 
+        console.log(localScore); 
+$("#topScore").text(localStorage.getItem("score")); 
+
+var sessionScore = parseInt(sessionStorage.score); 
+        console.log(sessionScore); 
+$("#highScore").text(sessionStorage.getItem("score")); 
+
+var userScore = score; 
+    $("#userScore").text(userScore); 
+
+    
+function topScore() {
+    if (userScore > localScore || isNaN(localScore)) {
+            localStorage.setItem("score", userScore)
+            $("#topScore").text(localStorage.getItem("score"));
+    }}; 
+
+
+
+function highScore() {
+    if (userScore > sessionScore || isNaN(sessionScore)) {
+        sessionStorage.setItem("score", userScore); 
+        $("#highScore").text(sessionStorage.getItem("score"));
+    }}; 
+
+highScore(); 
+topScore(); 
+       
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
 // ***********************************************************
