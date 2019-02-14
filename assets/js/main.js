@@ -441,36 +441,70 @@ let youLose = function () {
 // ***********************************************************
 
 // display Top Score & High Score stored in local & session storage
-
-var localScore = parseInt(localStorage.score); 
-        console.log(localScore); 
-$("#topScore").text(localStorage.getItem("score")); 
-
-var sessionScore = parseInt(sessionStorage.score); 
-        console.log(sessionScore); 
-$("#highScore").text(sessionStorage.getItem("score")); 
-
-var userScore = score; 
-    $("#userScore").text(userScore); 
-
+$(document).ready(function () {
+    var localScore = parseInt(localStorage.score); 
+            console.log(localScore); 
+    $("#topScore").text(localStorage.getItem("score")); 
     
-function topScore() {
-    if (userScore > localScore || isNaN(localScore)) {
-            localStorage.setItem("score", userScore)
-            $("#topScore").text(localStorage.getItem("score"));
-    }}; 
-
-
-
-function highScore() {
-    if (userScore > sessionScore || isNaN(sessionScore)) {
-        sessionStorage.setItem("score", userScore); 
-        $("#highScore").text(sessionStorage.getItem("score"));
-    }}; 
-
-highScore(); 
-topScore();
-
+    var sessionScore = parseInt(sessionStorage.score); 
+            console.log(sessionScore); 
+    $("#highScore").text(sessionStorage.getItem("score")); 
+    
+    var userScore = gameScore; 
+        $("#userScore").text(userScore); 
+    
+        
+    function topScore() {
+        if (userScore > localScore || isNaN(localScore)) {
+                localStorage.setItem("score", userScore)
+                $("#topScore").text(localStorage.getItem("score"));
+        }}; 
+    
+    
+    
+    function highScore() {
+        if (userScore > sessionScore || isNaN(sessionScore)) {
+            sessionStorage.setItem("score", userScore); 
+            $("#highScore").text(sessionStorage.getItem("score"));
+        }}; 
+    
+    highScore(); 
+    topScore(); 
+    
+    
+    //.....................................................................
+    
+    var config = {
+        apiKey: "AIzaSyAlO3LPywXaXAAAs7Q6Nx8zuRCJEt0dCwo",
+        authDomain: "inclass1-332fa.firebaseapp.com",
+        databaseURL: "https://inclass1-332fa.firebaseio.com",
+        projectId: "inclass1-332fa",
+        storageBucket: "inclass1-332fa.appspot.com",
+        messagingSenderId: "172625548890"
+      };
+    
+      firebase.initializeApp(config);
+    
+      var database = firebase.database();
+     
+      database.ref().set({
+        wins: wins,
+        losses: losses
+      });
+      
+    
+      database.ref().on("value", function(snapshot) {
+        console.log(snapshot.val());
+        $("#userWins").text(snapshot.val().wins);
+        $("#userLosses").text(snapshot.val().losses);
+    
+        wins = snapshot.val().wins; //!...is this needed?
+        
+        }, function(errorObject) {      
+          console.log("The read failed: " + errorObject.code);
+        });
+    }); 
+    
        
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
