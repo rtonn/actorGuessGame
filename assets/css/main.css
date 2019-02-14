@@ -240,3 +240,32 @@ table.score {
 #scoreboard {
 
 }
+#topScore {
+    color: Red; 
+    font-weight: bold; 
+}
+
+#highScore {
+    color: blue; 
+    font-weight: bold; 
+}
+
+#userScore {
+    color: green; 
+    font-weight: bold; 
+    
+}
+
+#scoreText{
+	font-weight: bold; 
+	color: black; 
+	text-align: center; 
+}
+
+table.score {
+    margin-left:auto; 
+	margin-right:auto;
+	border: 1px solid black;
+	border-collapse: separate;
+	border-spacing: 80px 0;
+  }

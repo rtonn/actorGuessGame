@@ -1,3 +1,4 @@
+
 //sessionStorage.clear();
 
 // DECLARE VARIABLES
@@ -93,6 +94,8 @@ $(document).ready(function () {
         $('html, body').animate({
             scrollTop: ($('#posterContainer').offset().top)
         }, 500);
+
+        // show round number
 
         //********************************************
         //            AJAX CALL ACTORS
@@ -223,7 +226,7 @@ let pickActor = function () {
     console.log("These are the actors: ", actors);
     console.log("Chosen actor: ", currentActor);
     
-      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyDgWAsjWKPvrtA1W_FUkK1pEK_jHVfdVDc";
+      var queryURL = "https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=2&q=" + currentActor + "movie trailer" + "&type=video&key=AIzaSyCObVmbM58d44kvf_IfR1lKwzvPtgdzodo";
 
       $.ajax({
         url: queryURL,
@@ -466,12 +469,17 @@ function highScore() {
     }}; 
 
 highScore(); 
-topScore(); 
+topScore();
+
        
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
 // ***********************************************************
 let nextRound = function () {
+    if (roundNumber = 5){
+        highScore()
+    }
+    roundNumber++;
     clearAll();
     pickActor();
 
