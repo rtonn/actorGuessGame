@@ -95,6 +95,8 @@ $(document).ready(function () {
             scrollTop: ($('#posterContainer').offset().top)
         }, 500);
 
+        // show round number
+
         //********************************************
         //            AJAX CALL ACTORS
 
@@ -438,6 +440,7 @@ let youLose = function () {
 //                 SCORING FUNCTION 
 // ***********************************************************
 
+
 // display High Score stored in local storage
 
 var highScore = parseInt(localStorage.highScore); 
@@ -450,7 +453,6 @@ function highScore() {
         localStorage.setItem("score", gameScore); 
         $("#highScore").text(gameScore);
     }}; 
-
        
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
@@ -512,7 +514,3 @@ let clearAll = function () {
 // *************************************************************************************************************************
 // ^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^
 // *************************************************************************************************************************
-
-
-
-
