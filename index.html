@@ -92,61 +92,89 @@
 
 
   
-
-  <div class="gamecontent">
-
+<img class="gamecontainer" src='assets/images/clapper_new.png'>
+    <div class="bottomcontent">
     <div class="w3-row">
 
-      <div class="w3-third w3-container">
+      <div class="w3-container">
+        <h2 class="h2">PRODUCTION</h2>
+        <div class="w3-quarter">
+  <div class="gamecontent"> <button id='startGame'>Start Game</button>
+  </div>
+</div>
 
-
-        <div id="player"></div>
+  <div class="quarter">
+      <div class="video">
+       <div id="player"></div>
       </div>
-          
-
-
-
-      <div class="w3-third w3-container" id='posterContainer'>
-        <button id='startGame'>Start Game</button>
-      </div>
-
-      <div class="w3-third w3-container" id='hints'>
-      </div>
-
     </div>
+      
+      <div class="mainPoster">  
+      <div class="w3-half" id='posterContainer'">
+      </div>
+    </div>
+  </div>
 
 
     <div class="w3-row">
+      <div class="w3-container">
+      <div class="w3-half" id='hints' class="hint-box">
+      </div>
+    </div>
+  </div>
 
-      <div class="w3-third w3-container" id='scoreboard'>
+      <div class="w3-row">
+    <div class="w3-container">
+      <h2 class="h2">NAME</h2>
+
+      <div class="w3-third w3-container" id='scoreboard' class="gameType">
       
       </div>
 
       <div class="w3-third w3-container" id='word'>
-        <h1 class="type" id="blankWord"></h1>
+        <h1 class="gameType" id="blankWord"></h1>
       </div>
       
-      <div class="w3-rest w3-container" id='guesses'>
+      <div class="w3-rest w3-container" id='guesses' class="gameType">
         </div>
 
     </div>
 
   </div>  
   
-    
+
+    <div class="w3-row">
+        <div class="w3-rest w3-container">
+        <table class="score">
+            <th>
+              <td id="scoreText" class="gameType">Scores</td>  
+            </th>
+                   
+            <tr id="scoreRow" class="gameType">
+              <td><p id="currentScore" class="gameType">Your current score is: <span id="userScore"></span> </p></td>
+              <td><p id="phighScore" class="gameType">Session High Score:<span id="highScore"></span></p></td>
+              <td><p id="ptopScore" class="gameType">Top Score: <span id="topScore"></span></p></td>
+            </tr>
+        </table> 
+      </div>
+    </div>    
+
+  </div>
+
   
   
     <div class="w3-row">
         <div class="w3-rest w3-container">
         <table class="score">
+          <div class="gameType">
             <th>
-              <td id="scoreText">Scores</td>  
+              <td id="scoreText" class="gameType">Scores</td>  
             </th>
                    
-            <tr id="scoreRow">
-              <td><p id="currentScore">Your current score is: <span id="userScore"></span>  </td>
-              <td><p id="phighScore">Session High Score:<span id="highScore"></span></p></td>
-              <td><p id="ptopScore">Top Score: <span id="topScore"></span></p></td>
+            <tr id="scoreRow" class="gameType">
+              <td><p id="currentScore" class="gameType">Your current score is: <span id="userScore"></span></p></td>
+              <td><p id="phighScore" class="gameType">Session High Score:<span id="highScore"></span></p></td>
+              <td><p id="ptopScore" class="gameType">Top Score: <span id="topScore"></span></p></td>
             </tr>
             <tr id="winsRow">
               <td><p id="pcurrentWins">Wins: <span id="userWins"></span></p></td>
@@ -155,15 +183,11 @@
             </tr>
         </table> 
       </div>
-    </div>    
-
-
-
-  <div class="footer">
-    <div class="w3-row">
-      <div class="w3-third">
-        <a href="facebook" src="assets/images/facebook.png" target="blank">
       </div>
+    </div>    
+  </div>
+</div>
+
 
       
      <div class="footer">
