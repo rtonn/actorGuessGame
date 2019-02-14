@@ -95,6 +95,8 @@ $(document).ready(function () {
             scrollTop: ($('#posterContainer').offset().top)
         }, 500);
 
+        // show round number
+
         //********************************************
         //            AJAX CALL ACTORS
 
@@ -467,12 +469,17 @@ function highScore() {
     }}; 
 
 highScore(); 
-topScore(); 
+topScore();
+
        
 // ***********************************************************
 //                    NEXT ROUND FUNCTION
 // ***********************************************************
 let nextRound = function () {
+    if (roundNumber = 5){
+        highScore()
+    }
+    roundNumber++;
     clearAll();
     pickActor();
 
@@ -525,7 +532,3 @@ let clearAll = function () {
 // *************************************************************************************************************************
 // ^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^^^^^^^^^^^^^^ EVENT HANDLERS ^^^^^^^^^^^^^
 // *************************************************************************************************************************
-
-
-
-

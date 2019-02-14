@@ -3,7 +3,6 @@
 .topcontent {
 	background-color: #fcdd03;
 	background-size: 100% 50%;
-		
 }
 
 
@@ -15,12 +14,40 @@
 	font-family: 'Pontano Sans', sans-serif;
 }
 
+.h2 {
+	font-size: 45px;
+	margin-top: 25px;
+	margin-left: 50px;
+	margin-right: 50px;
+	font-weight: bold;
+	color: white;
+	font-family: 'Pontano Sans', sans-serif;
+	z-index: 3;
+}
+
 .type {
 	margin-top: 100px;
 	font-size: 18px;
 	text-align: center;
 	color: black;
 	font-family: 'Pontano Sans', sans-serif;
+}
+
+.hr {
+	color: white;
+	border: 3px solid white;
+	margin-top: 50px;
+}
+
+.gameType {
+	font-size: 18px;
+	color: white;
+	font-family: 'Pontano Sans', sans-serif;
+	z-index: 3;
+}
+
+.altType {
+	color: #fcdd03;
 }
 
 .lights {
@@ -73,41 +100,78 @@
 	z-index: 1;
 }
 
-.gamecontent {
-	background-color: white;
+
+.gamecontainer  {
+	position: relative;
+	margin-left: 240px;
+	margin-right: 250px;
+	max-width: 68%;
+	min-width: 40%;
+	max-height: 50%;
+	margin-top: 100px;
+	z-index: -1;
 }
 
-
-
-/*
-.light {
+.bottomcontent  {
+	/*background: url('../images/lg-game-container.png') no-repeat;
+	background-size: 35% 100%;*/
 	position: relative;
-	right: 40px;
-	height: 100%;
-	width: 100%;
-	z-index: 2;
-	
+	background-color: black;
+	margin-left: 240px;
+	margin-right: 250px;
+	max-width: 68%;
+	min-width: 68%;
+	height: auto;
+	background-repeat: no-repeat;
+	background-position: center center;
+
 }
 
-.lamp {
-	position: relative;
-	
-	right: 40px;
-	height: 100%;
-	width: 100%;
+.video {
+	margin-top: 50px;
+	margin-left: 50px;
+	margin-right: 30px;
+	max-width: 60%;
+	min-width: 60%;
+	max-height: 100%;
+	min-height: 50%;
 	z-index: 1;
 }
 
-.lamp {
-	position: relative;
-	top: -300px;
-	left: 700px;
-	height: 15%;
-	width: 15%;
-	z-index: 2;
-	
-}*/
+.hint {
+	color: white;	
+}
 
+#mainPoster {
+	margin-top: 50px;
+	margin-left: 80px;
+	margin-right: 30px;
+	max-width: 60%;
+	min-width: 60%;
+	max-height: 80%;
+	min-height: 50%;
+	z-index: 1;
+}
+
+#hint {
+	border: white;
+}
+
+#hint1 {
+	width: 150px;
+	height: 220px;
+	border: white;
+}
+
+#hint2 {
+	width: 150px;
+	height: 220px;
+	border: white;
+}
+
+#player {
+	margin-top: 100px;
+}
 
 
 .topPadding {
@@ -115,25 +179,67 @@
 }
 
 .footer {
+	margin-top: 100px;
 	position: relative;
 	bottom: 0;
 	width: 100%;
-	
 	background-color: black;
 	width: 100%;
 	height: 200px;
 	text-align: center;
 }
 
-.facebook {
+.fb {
 	position: relative;
-	height: 15%;
-	width: 15%;
+	height: 8%;
+	width: 8%;
 	z-index: 3;
-	margin-top: 80px;
+	margin-top: 20px;
+	margin-left: 550px;
 }
 
+.overlay {
+	width: 100px;
+	height: 100px;
+}
 
+#topScore {
+    color: Red; 
+    font-weight: bold; 
+}
+
+#highScore {
+    color: blue; 
+    font-weight: bold; 
+}
+
+#userScore {
+    color: green; 
+    font-weight: bold; 
+    
+}
+
+#scoreText{
+	font-weight: bold; 
+	color: black; 
+	text-align: center; 
+}
+
+table.score {
+    margin-left:auto; 
+	margin-right:auto;
+	border: 1px solid black;
+	border-collapse: separate;
+	border-spacing: 80px 0;
+  }
+
+  #startGame  {
+  	margin-top: 50px;
+  }
+
+#scoreboard {
+
+}
 #topScore {
     color: Red; 
     font-weight: bold; 
